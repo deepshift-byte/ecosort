@@ -56,3 +56,4 @@ training/weights/
 training/.venv/
 *.pt
 __pycache__/
+training/runs_train.log

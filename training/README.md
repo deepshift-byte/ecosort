@@ -24,6 +24,20 @@ single item each, so `build_dataset.py` turns each one into a single box
 > `datasets.py`. Folder names that are missing from `CLASSIFICATION_MAP` are
 > skipped, and the script prints the box count per category so you can spot gaps.
 
+## Option 0: open data, no Kaggle account (used for the bundled model)
+
+```bash
+python build_open_data.py --per-class 400   # Open Images boxes + TrashNet
+python train.py --imgsz 320 --epochs 30 --device cpu
+python export_tflite.py
+```
+
+`build_open_data.py` pulls ~2.3k Google Open Images photos that have
+human-drawn boxes for ~45 waste-relevant classes (bottles, cans, cutlery,
+fruit, phones, light bulbs, syringes…) plus TrashNet's 2.5k trash photos.
+It covers all 7 categories, but **hazardous** has few examples (light bulbs and
+syringes only), so add the Kaggle battery images when you can.
+
 ## Option A: train on Kaggle (free GPU, no token needed)
 
 1. Create a new Kaggle Notebook and set the accelerator to GPU (T4 / P100).
