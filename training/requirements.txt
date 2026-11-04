@@ -1,0 +1,12 @@
+ultralytics>=8.3
+kagglehub>=0.3
+pillow
+numpy
+# Needed by `yolo export format=tflite`:
+tensorflow-cpu>=2.16
+onnx
+onnx2tf
+onnxslim
+sng4onnx
+onnx_graphsurgeon
+tf_keras

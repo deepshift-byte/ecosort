@@ -1,0 +1,701 @@
+{
+ "bins": {
+  "plastic": "Plastics / yellow recycling bin",
+  "paper": "Paper & cardboard / blue recycling bin",
+  "glass": "Glass bottle bank / green glass bin",
+  "metal": "Metals & cans recycling bin",
+  "organic": "Compost heap or green / organic waste bin",
+  "ewaste": "E-waste drop-off point or electronics retailer take-back",
+  "hazardous": "Hazardous waste collection point \u2014 never household bins"
+ },
+ "items": [
+  {
+   "name": "plastic bottle",
+   "aliases": [
+    "water bottle",
+    "soda bottle",
+    "pet bottle",
+    "drink bottle",
+    "juice bottle"
+   ],
+   "category": "plastic",
+   "handling": "Empty it, rinse, squash and put the cap back on.",
+   "where": "Plastics / yellow recycling bin"
+  },
+  {
+   "name": "plastic bag",
+   "aliases": [
+    "carrier bag",
+    "shopping bag",
+    "polythene",
+    "kaveera",
+    "nylon bag",
+    "polythene bag"
+   ],
+   "category": "plastic",
+   "handling": "Reuse it. Many kerbside bins refuse film \u2014 return to supermarket film collection if available.",
+   "where": "Plastics / yellow recycling bin"
+  },
+  {
+   "name": "plastic cup",
+   "aliases": [
+    "disposable cup",
+    "plastic glass"
+   ],
+   "category": "plastic",
+   "handling": "Rinse and recycle with plastics.",
+   "where": "Plastics / yellow recycling bin"
+  },
+  {
+   "name": "food wrapper",
+   "aliases": [
+    "sweet wrapper",
+    "candy wrapper",
+    "chip packet",
+    "crisp packet",
+    "snack wrapper"
+   ],
+   "category": "plastic",
+   "handling": "Mixed-material film: put in plastics only if accepted locally, otherwise general waste.",
+   "where": "Plastics / yellow recycling bin"
+  },
+  {
+   "name": "plastic container",
+   "aliases": [
+    "tub",
+    "yoghurt pot",
+    "yogurt cup",
+    "takeaway container",
+    "food container",
+    "margarine tub"
+   ],
+   "category": "plastic",
+   "handling": "Scrape out food, rinse, recycle with plastics.",
+   "where": "Plastics / yellow recycling bin"
+  },
+  {
+   "name": "straw",
+   "aliases": [
+    "plastic straw",
+    "drinking straw"
+   ],
+   "category": "plastic",
+   "handling": "Too small to sort \u2014 general waste. Switch to reusable straws.",
+   "where": "Plastics / yellow recycling bin"
+  },
+  {
+   "name": "plastic cutlery",
+   "aliases": [
+    "plastic fork",
+    "plastic spoon",
+    "plastic knife"
+   ],
+   "category": "plastic",
+   "handling": "Usually not recyclable \u2014 general waste; prefer reusable cutlery.",
+   "where": "Plastics / yellow recycling bin"
+  },
+  {
+   "name": "jerrycan",
+   "aliases": [
+    "jerry can",
+    "plastic jerrican"
+   ],
+   "category": "plastic",
+   "handling": "Rinse well; reuse or recycle with rigid plastics. If it held fuel or chemicals, treat as hazardous.",
+   "where": "Plastics / yellow recycling bin"
+  },
+  {
+   "name": "shampoo bottle",
+   "aliases": [
+    "detergent bottle",
+    "soap bottle",
+    "lotion bottle"
+   ],
+   "category": "plastic",
+   "handling": "Rinse out and recycle with plastics; remove pumps.",
+   "where": "Plastics / yellow recycling bin"
+  },
+  {
+   "name": "styrofoam",
+   "aliases": [
+    "polystyrene",
+    "foam box",
+    "foam cup",
+    "thermocol"
+   ],
+   "category": "plastic",
+   "handling": "Rarely recycled kerbside \u2014 check local drop-off; otherwise general waste.",
+   "where": "Plastics / yellow recycling bin"
+  },
+  {
+   "name": "cardboard box",
+   "aliases": [
+    "carton box",
+    "shipping box",
+    "amazon box",
+    "cardboard"
+   ],
+   "category": "paper",
+   "handling": "Flatten, remove tape, keep dry.",
+   "where": "Paper & cardboard / blue recycling bin"
+  },
+  {
+   "name": "newspaper",
+   "aliases": [
+    "news paper",
+    "magazine",
+    "flyer",
+    "leaflet"
+   ],
+   "category": "paper",
+   "handling": "Keep dry and recycle with paper.",
+   "where": "Paper & cardboard / blue recycling bin"
+  },
+  {
+   "name": "paper",
+   "aliases": [
+    "office paper",
+    "printer paper",
+    "notebook",
+    "exercise book",
+    "envelope",
+    "letter"
+   ],
+   "category": "paper",
+   "handling": "Recycle with paper; shred sensitive documents first.",
+   "where": "Paper & cardboard / blue recycling bin"
+  },
+  {
+   "name": "book",
+   "aliases": [
+    "books",
+    "textbook"
+   ],
+   "category": "paper",
+   "handling": "Donate if usable; otherwise recycle with paper (remove hard covers).",
+   "where": "Paper & cardboard / blue recycling bin"
+  },
+  {
+   "name": "pizza box",
+   "aliases": [
+    "greasy box"
+   ],
+   "category": "organic",
+   "handling": "Greasy parts go to compost; clean lid parts can go with paper.",
+   "where": "Compost heap or green / organic waste bin"
+  },
+  {
+   "name": "paper cup",
+   "aliases": [
+    "coffee cup",
+    "disposable coffee cup"
+   ],
+   "category": "paper",
+   "handling": "Most have a plastic lining \u2014 use a cup recycling point or general waste. Lids go with plastics.",
+   "where": "Paper & cardboard / blue recycling bin"
+  },
+  {
+   "name": "egg carton",
+   "aliases": [
+    "egg box",
+    "egg tray"
+   ],
+   "category": "paper",
+   "handling": "Recycle with paper or compost it.",
+   "where": "Paper & cardboard / blue recycling bin"
+  },
+  {
+   "name": "tissue",
+   "aliases": [
+    "paper towel",
+    "napkin",
+    "serviette",
+    "kitchen roll"
+   ],
+   "category": "organic",
+   "handling": "Used tissues can be composted; never in paper recycling.",
+   "where": "Compost heap or green / organic waste bin"
+  },
+  {
+   "name": "milk carton",
+   "aliases": [
+    "juice carton",
+    "tetra pak",
+    "tetrapak"
+   ],
+   "category": "paper",
+   "handling": "Rinse and flatten; recycle where cartons are accepted.",
+   "where": "Paper & cardboard / blue recycling bin"
+  },
+  {
+   "name": "glass bottle",
+   "aliases": [
+    "beer bottle",
+    "wine bottle",
+    "soda glass bottle"
+   ],
+   "category": "glass",
+   "handling": "Rinse, remove caps (caps go to metal), bottle bank.",
+   "where": "Glass bottle bank / green glass bin"
+  },
+  {
+   "name": "glass jar",
+   "aliases": [
+    "jam jar",
+    "sauce jar",
+    "baby food jar"
+   ],
+   "category": "glass",
+   "handling": "Rinse, remove the metal lid, recycle with glass.",
+   "where": "Glass bottle bank / green glass bin"
+  },
+  {
+   "name": "drinking glass",
+   "aliases": [
+    "wine glass",
+    "broken glass",
+    "glass cup"
+   ],
+   "category": "glass",
+   "handling": "Drinking glass and window glass melt differently \u2014 wrap and put in general waste unless your area accepts it.",
+   "where": "Glass bottle bank / green glass bin"
+  },
+  {
+   "name": "mirror",
+   "aliases": [
+    "window glass",
+    "glass pane"
+   ],
+   "category": "glass",
+   "handling": "Not bottle-bank glass. Wrap safely and take to a recycling centre.",
+   "where": "Glass bottle bank / green glass bin"
+  },
+  {
+   "name": "aluminium can",
+   "aliases": [
+    "aluminum can",
+    "soda can",
+    "beer can",
+    "drink can",
+    "tin can",
+    "coke can"
+   ],
+   "category": "metal",
+   "handling": "Empty, rinse and squash.",
+   "where": "Metals & cans recycling bin"
+  },
+  {
+   "name": "food tin",
+   "aliases": [
+    "tin",
+    "canned food",
+    "bean tin",
+    "tuna can"
+   ],
+   "category": "metal",
+   "handling": "Rinse, push the lid inside, recycle with metals.",
+   "where": "Metals & cans recycling bin"
+  },
+  {
+   "name": "aluminium foil",
+   "aliases": [
+    "aluminum foil",
+    "foil",
+    "foil tray",
+    "silver paper"
+   ],
+   "category": "metal",
+   "handling": "Clean foil only \u2014 scrunch into a ball first.",
+   "where": "Metals & cans recycling bin"
+  },
+  {
+   "name": "bottle cap",
+   "aliases": [
+    "metal cap",
+    "crown cap",
+    "metal lid",
+    "jar lid"
+   ],
+   "category": "metal",
+   "handling": "Collect caps in a can, then recycle with metals.",
+   "where": "Metals & cans recycling bin"
+  },
+  {
+   "name": "cutlery",
+   "aliases": [
+    "fork",
+    "spoon",
+    "knife",
+    "metal spoon"
+   ],
+   "category": "metal",
+   "handling": "Donate if usable, otherwise scrap metal recycling.",
+   "where": "Metals & cans recycling bin"
+  },
+  {
+   "name": "scrap metal",
+   "aliases": [
+    "iron sheet",
+    "nails",
+    "wire",
+    "metal pipe",
+    "pot",
+    "pan",
+    "saucepan"
+   ],
+   "category": "metal",
+   "handling": "Take to a scrap-metal dealer or recycling centre.",
+   "where": "Metals & cans recycling bin"
+  },
+  {
+   "name": "aerosol can",
+   "aliases": [
+    "spray can",
+    "deodorant can",
+    "air freshener"
+   ],
+   "category": "hazardous",
+   "handling": "Only fully empty aerosols go in metal recycling. Partly full ones are hazardous.",
+   "where": "Hazardous waste collection point \u2014 never household bins"
+  },
+  {
+   "name": "banana peel",
+   "aliases": [
+    "banana",
+    "banana skin",
+    "matooke peel",
+    "plantain peel"
+   ],
+   "category": "organic",
+   "handling": "Compost it.",
+   "where": "Compost heap or green / organic waste bin"
+  },
+  {
+   "name": "fruit",
+   "aliases": [
+    "apple",
+    "orange",
+    "mango",
+    "pineapple",
+    "fruit peel",
+    "peels",
+    "orange peel",
+    "apple core"
+   ],
+   "category": "organic",
+   "handling": "Compost it.",
+   "where": "Compost heap or green / organic waste bin"
+  },
+  {
+   "name": "vegetables",
+   "aliases": [
+    "vegetable scraps",
+    "cabbage",
+    "carrot",
+    "potato peel",
+    "onion skin",
+    "salad"
+   ],
+   "category": "organic",
+   "handling": "Compost it.",
+   "where": "Compost heap or green / organic waste bin"
+  },
+  {
+   "name": "food scraps",
+   "aliases": [
+    "leftovers",
+    "food waste",
+    "left over food",
+    "rice",
+    "bread",
+    "meat",
+    "bones",
+    "fish"
+   ],
+   "category": "organic",
+   "handling": "Organic bin; meat and bones only if your compost service accepts them.",
+   "where": "Compost heap or green / organic waste bin"
+  },
+  {
+   "name": "coffee grounds",
+   "aliases": [
+    "tea bags",
+    "tea leaves",
+    "coffee filter"
+   ],
+   "category": "organic",
+   "handling": "Compost it \u2014 great for soil.",
+   "where": "Compost heap or green / organic waste bin"
+  },
+  {
+   "name": "eggshells",
+   "aliases": [
+    "egg shell",
+    "egg shells"
+   ],
+   "category": "organic",
+   "handling": "Compost it (crush first).",
+   "where": "Compost heap or green / organic waste bin"
+  },
+  {
+   "name": "garden waste",
+   "aliases": [
+    "leaves",
+    "grass",
+    "grass clippings",
+    "branches",
+    "flowers",
+    "twigs",
+    "yard waste"
+   ],
+   "category": "organic",
+   "handling": "Compost or green waste collection.",
+   "where": "Compost heap or green / organic waste bin"
+  },
+  {
+   "name": "wood",
+   "aliases": [
+    "sawdust",
+    "wooden pallet",
+    "untreated wood"
+   ],
+   "category": "organic",
+   "handling": "Untreated wood can be composted or chipped; painted wood goes to a recycling centre.",
+   "where": "Compost heap or green / organic waste bin"
+  },
+  {
+   "name": "phone",
+   "aliases": [
+    "mobile phone",
+    "cell phone",
+    "smartphone",
+    "cellphone",
+    "iphone",
+    "android phone"
+   ],
+   "category": "ewaste",
+   "handling": "Wipe data, remove SIM, take to an e-waste collection point.",
+   "where": "E-waste drop-off point or electronics retailer take-back"
+  },
+  {
+   "name": "laptop",
+   "aliases": [
+    "computer",
+    "pc",
+    "notebook computer",
+    "desktop",
+    "tablet",
+    "ipad"
+   ],
+   "category": "ewaste",
+   "handling": "Back up and wipe data; e-waste collection or manufacturer take-back.",
+   "where": "E-waste drop-off point or electronics retailer take-back"
+  },
+  {
+   "name": "charger",
+   "aliases": [
+    "cable",
+    "usb cable",
+    "adapter",
+    "power cord",
+    "earphones",
+    "headphones"
+   ],
+   "category": "ewaste",
+   "handling": "E-waste drop-off; cables are valuable for copper recovery.",
+   "where": "E-waste drop-off point or electronics retailer take-back"
+  },
+  {
+   "name": "remote control",
+   "aliases": [
+    "remote",
+    "tv remote"
+   ],
+   "category": "ewaste",
+   "handling": "Remove the batteries (hazardous), then e-waste.",
+   "where": "E-waste drop-off point or electronics retailer take-back"
+  },
+  {
+   "name": "television",
+   "aliases": [
+    "tv",
+    "monitor",
+    "screen"
+   ],
+   "category": "ewaste",
+   "handling": "E-waste collection \u2014 old CRT screens contain lead.",
+   "where": "E-waste drop-off point or electronics retailer take-back"
+  },
+  {
+   "name": "keyboard",
+   "aliases": [
+    "computer mouse",
+    "mouse",
+    "printer",
+    "router",
+    "speaker"
+   ],
+   "category": "ewaste",
+   "handling": "E-waste drop-off point.",
+   "where": "E-waste drop-off point or electronics retailer take-back"
+  },
+  {
+   "name": "small appliance",
+   "aliases": [
+    "kettle",
+    "toaster",
+    "iron",
+    "hair dryer",
+    "blender",
+    "microwave",
+    "fan",
+    "radio"
+   ],
+   "category": "ewaste",
+   "handling": "E-waste or electrical recycling point.",
+   "where": "E-waste drop-off point or electronics retailer take-back"
+  },
+  {
+   "name": "battery",
+   "aliases": [
+    "batteries",
+    "aa battery",
+    "aaa battery",
+    "lithium battery",
+    "car battery",
+    "button cell",
+    "power bank",
+    "dry cell"
+   ],
+   "category": "hazardous",
+   "handling": "Tape the terminals and take to a battery collection point. Never bin \u2014 fire risk.",
+   "where": "Hazardous waste collection point \u2014 never household bins"
+  },
+  {
+   "name": "light bulb",
+   "aliases": [
+    "bulb",
+    "fluorescent tube",
+    "cfl",
+    "energy saving bulb",
+    "tube light"
+   ],
+   "category": "hazardous",
+   "handling": "Contains mercury \u2014 hazardous collection. LED bulbs go to e-waste.",
+   "where": "Hazardous waste collection point \u2014 never household bins"
+  },
+  {
+   "name": "paint",
+   "aliases": [
+    "paint tin",
+    "paint can",
+    "varnish",
+    "thinner",
+    "solvent"
+   ],
+   "category": "hazardous",
+   "handling": "Hazardous waste collection; never pour down drains.",
+   "where": "Hazardous waste collection point \u2014 never household bins"
+  },
+  {
+   "name": "chemicals",
+   "aliases": [
+    "bleach",
+    "pesticide",
+    "insecticide",
+    "herbicide",
+    "acid",
+    "cleaning chemicals",
+    "rat poison",
+    "fertilizer"
+   ],
+   "category": "hazardous",
+   "handling": "Keep in the original container, lid tight; hazardous collection.",
+   "where": "Hazardous waste collection point \u2014 never household bins"
+  },
+  {
+   "name": "medicine",
+   "aliases": [
+    "pills",
+    "tablets",
+    "expired medicine",
+    "drugs",
+    "medication",
+    "syrup"
+   ],
+   "category": "hazardous",
+   "handling": "Return to a pharmacy or health centre for safe disposal.",
+   "where": "Pharmacy / health-centre take-back"
+  },
+  {
+   "name": "syringe",
+   "aliases": [
+    "needle",
+    "sharps",
+    "injection",
+    "lancet"
+   ],
+   "category": "hazardous",
+   "handling": "Put in a rigid sharps container and return to a health facility.",
+   "where": "Hazardous waste collection point \u2014 never household bins"
+  },
+  {
+   "name": "motor oil",
+   "aliases": [
+    "engine oil",
+    "used oil",
+    "petrol",
+    "diesel",
+    "fuel",
+    "kerosene",
+    "paraffin"
+   ],
+   "category": "hazardous",
+   "handling": "Seal in a container and take to a garage or hazardous collection.",
+   "where": "Hazardous waste collection point \u2014 never household bins"
+  },
+  {
+   "name": "thermometer",
+   "aliases": [
+    "mercury thermometer"
+   ],
+   "category": "hazardous",
+   "handling": "Mercury \u2014 hazardous collection. Digital thermometers are e-waste.",
+   "where": "Hazardous waste collection point \u2014 never household bins"
+  },
+  {
+   "name": "gas cylinder",
+   "aliases": [
+    "gas canister",
+    "lpg cylinder",
+    "camping gas"
+   ],
+   "category": "hazardous",
+   "handling": "Return to the supplier; never crush or burn.",
+   "where": "Hazardous waste collection point \u2014 never household bins"
+  },
+  {
+   "name": "nail polish",
+   "aliases": [
+    "nail varnish",
+    "nail polish remover",
+    "acetone"
+   ],
+   "category": "hazardous",
+   "handling": "Hazardous collection.",
+   "where": "Hazardous waste collection point \u2014 never household bins"
+  },
+  {
+   "name": "diaper",
+   "aliases": [
+    "nappy",
+    "diapers",
+    "sanitary pad",
+    "pads"
+   ],
+   "category": "organic",
+   "handling": "Not recyclable \u2014 wrap and put in general waste (not compost).",
+   "where": "General waste bin (wrapped)"
+  }
+ ]
+}
