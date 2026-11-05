@@ -24,6 +24,8 @@ def main():
     ap.add_argument("--name", default="ecosort", help="run name under runs/")
     ap.add_argument("--patience", type=int, default=25)
     ap.add_argument("--close-mosaic", type=int, default=10)
+    ap.add_argument("--hours", type=float, default=None,
+                    help="time budget; overrides --epochs (useful on CI runners)")
     args = ap.parse_args()
 
     last = HERE / "runs" / args.name / "weights" / "last.pt"
@@ -47,6 +49,7 @@ def main():
         name=args.name,
         exist_ok=True,
         patience=args.patience,
+        **({"time": args.hours} if args.hours else {}),
         # Augmentations that matter for trash photos.
         hsv_h=0.015, hsv_s=0.6, hsv_v=0.4,
         degrees=10, fliplr=0.5, flipud=0.1,

@@ -1,0 +1,105 @@
+name: Train model
+
+# Builds the 7-class dataset (Open Images + TrashNet + TrashBox, plus the
+# Kaggle datasets when the KAGGLE_API_TOKEN secret is set), trains YOLOv8n,
+# exports it to TensorFlow Lite, commits it to assets/models/ and builds the APK.
+
+on:
+  workflow_dispatch:
+    inputs:
+      hours:
+        description: "Training time budget (hours, max ~4.5)"
+        default: "4"
+      per_class:
+        description: "Open Images photos per category"
+        default: "900"
+
+permissions:
+  contents: write
+
+jobs:
+  train:
+    runs-on: ubuntu-latest
+    timeout-minutes: 350
+    env:
+      KAGGLE_API_TOKEN: ${{ secrets.KAGGLE_API_TOKEN }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Free disk space
+        run: sudo rm -rf /usr/share/dotnet /usr/local/lib/android /opt/ghc /opt/hostedtoolcache/CodeQL && df -h /
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install training tools
+        run: |
+          pip install torch torchvision --index-url https://download.pytorch.org/whl/cpu
+          pip install ultralytics kagglehub litert-torch pillow numpy
+
+      - name: Open Images + TrashNet
+        working-directory: training
+        run: python -u build_open_data.py --name ecosort_v2 --oi-train --per-class ${{ inputs.per_class }} --hazard-images 1000
+
+      - name: TrashBox
+        working-directory: training
+        run: |
+          GIT_LFS_SKIP_SMUDGE=1 git clone --depth 1 https://github.com/nikhilvenkatkumsetty/TrashBox /tmp/trashbox
+          rm -rf /tmp/trashbox/.git /tmp/trashbox/TrashBox_train_set
+          python -u add_trashbox.py /tmp/trashbox --name ecosort_v2 --cap 1200
+          rm -rf /tmp/trashbox
+
+      - name: Kaggle datasets (needs KAGGLE_API_TOKEN secret)
+        if: env.KAGGLE_API_TOKEN != ''
+        continue-on-error: true
+        working-directory: training
+        run: |
+          python -u download_kaggle.py
+          python -u build_dataset.py --cap 1200
+
+      - name: Combine datasets
+        working-directory: training
+        run: |
+          python - <<'PY'
+          import pathlib
+          from datasets import CLASSES
+          d = pathlib.Path("data").resolve()
+          parts = [p for p in ("ecosort_v2", "ecosort") if (d / p / "images" / "train").is_dir()]
+          y = "train:\n" + "".join(f"  - {d / p / 'images/train'}\n" for p in parts)
+          y += "val:\n" + "".join(f"  - {d / p / 'images/val'}\n" for p in parts)
+          y += "names:\n" + "".join(f"  {i}: {c}\n" for i, c in enumerate(CLASSES))
+          (d / "combined.yaml").write_text(y)
+          print(y)
+          for p in parts:
+              print(p, len(list((d / p / "images" / "train").iterdir())), "train images")
+          PY
+
+      - name: Train
+        working-directory: training
+        run: python -u train.py --model yolov8n.pt --data combined --name ecosort_v2 --imgsz 320 --batch 32 --device cpu --epochs 60 --hours ${{ inputs.hours }} --patience 8 --close-mosaic 3
+
+      - name: Export to TensorFlow Lite
+        working-directory: training
+        run: python -u export_tflite.py --weights runs/ecosort_v2/weights/best.pt --imgsz 320
+
+      - name: Upload training report
+        uses: actions/upload-artifact@v4
+        with:
+          name: training-report
+          path: |
+            training/runs/ecosort_v2/results.csv
+            training/runs/ecosort_v2/*.png
+            training/runs/ecosort_v2/weights/best.pt
+
+      - name: Commit model
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add assets/models
+          git commit -m "Update EcoSort model (trained by CI)" || echo "no changes"
+          git push
+
+  apk:
+    needs: train
+    uses: ./.github/workflows/build-apk.yml
