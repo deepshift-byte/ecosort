@@ -57,3 +57,4 @@ training/.venv/
 *.pt
 __pycache__/
 training/runs_train.log
+training/data/ecosort*

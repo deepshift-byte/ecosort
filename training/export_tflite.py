@@ -59,7 +59,7 @@ COCO_MAP = {
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--weights", default=str(HERE / "runs/ecosort/weights/best.pt"))
+    ap.add_argument("--weights", default=str(HERE / "runs/ecosort_v2/weights/best.pt"))
     ap.add_argument("--imgsz", type=int, default=320,
                     help="320 for real-time on mid-range phones, 640 for best accuracy")
     ap.add_argument("--coco", action="store_true", help="weights are a COCO-pretrained model")
