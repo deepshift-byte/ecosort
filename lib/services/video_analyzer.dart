@@ -3,7 +3,8 @@ import 'dart:ui';
 
 import 'package:video_player/video_player.dart';
 import 'dart:io';
-import 'package:video_thumbnail/video_thumbnail.dart';
+import 'package:get_thumbnail_video/index.dart';
+import 'package:get_thumbnail_video/video_thumbnail.dart';
 
 import '../models/detection.dart';
 import '../models/waste_category.dart';
@@ -136,14 +137,18 @@ class VideoAnalyzer {
     final frames = <VideoFrameResult>[];
     for (var t = 0; t <= totalMs; t += step) {
       if (isCancelled?.call() ?? false) break;
-      final bytes = await VideoThumbnail.thumbnailData(
-        video: path,
-        imageFormat: ImageFormat.JPEG,
-        maxWidth: 720,
-        timeMs: t,
-        quality: 80,
-      );
-      if (bytes == null) continue;
+      final Uint8List bytes;
+      try {
+        bytes = await VideoThumbnail.thumbnailData(
+          video: path,
+          imageFormat: ImageFormat.JPEG,
+          maxWidth: 720,
+          timeMs: t,
+          quality: 80,
+        );
+      } catch (_) {
+        continue; // frame could not be decoded (e.g. past the end)
+      }
       final res = await detector.detectBytes(bytes);
       final tracked = tracker.update(res.detections, t);
       final frame = VideoFrameResult(
