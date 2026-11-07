@@ -6,6 +6,9 @@ on:
   workflow_dispatch:
   workflow_call:
 
+permissions:
+  contents: write  # publish the APK as a GitHub Release
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -44,3 +47,13 @@ jobs:
           name: EcoSort-apk
           path: build/app/outputs/flutter-apk/app-release.apk
           retention-days: 30
+
+      - name: Publish GitHub Release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          tag="build-${{ github.run_number }}"
+          cp build/app/outputs/flutter-apk/app-release.apk EcoSort.apk
+          notes="EcoSort Android app, built from ${GITHUB_SHA::7}. Download EcoSort.apk on your phone and open it to install (allow installs from unknown sources when asked)."
+          gh release create "$tag" EcoSort.apk --repo "$GITHUB_REPOSITORY" \
+            --target "$GITHUB_SHA" --title "EcoSort ${tag}" --notes "$notes" --latest
