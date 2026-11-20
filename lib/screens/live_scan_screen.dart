@@ -3,12 +3,14 @@ import 'dart:io';
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:wakelock_plus/wakelock_plus.dart';
 
 import '../models/detection.dart';
 import '../models/scan_record.dart';
 import '../models/waste_category.dart';
 import '../services/detector_service.dart';
 import '../services/history_service.dart';
+import '../services/live_smoother.dart';
 import '../services/settings_service.dart';
 import '../widgets/common.dart';
 import '../widgets/detection_painter.dart';
@@ -32,6 +34,8 @@ class _LiveScanScreenState extends State<LiveScanScreen> with WidgetsBindingObse
   int _fps = 0;
   int _frames = 0;
   DateTime _fpsWindow = DateTime.now();
+  final _smoother = LiveSmoother();
+  bool _suspended = false; // camera released while app is in background
 
   late final DetectorService _detector = context.read<DetectorService>();
 
@@ -39,6 +43,8 @@ class _LiveScanScreenState extends State<LiveScanScreen> with WidgetsBindingObse
   void initState() {
     super.initState();
     WidgetsBinding.instance.addObserver(this);
+    // Keep the screen on while scanning so it doesn't dim or lock.
+    WakelockPlus.enable();
     _init();
   }
 
@@ -79,6 +85,7 @@ class _LiveScanScreenState extends State<LiveScanScreen> with WidgetsBindingObse
       _controller = c;
       _result = null;
       _torch = false;
+      _smoother.reset();
     });
   }
 
@@ -99,25 +106,36 @@ class _LiveScanScreenState extends State<LiveScanScreen> with WidgetsBindingObse
       _frames = 0;
       _fpsWindow = now;
     }
-    setState(() => _result = res);
+    final stable = _smoother.update(res.detections);
+    setState(() => _result = DetectionResult(
+          detections: stable,
+          imageSize: res.imageSize,
+          inferenceMs: res.inferenceMs,
+        ));
   }
 
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
-    final c = _controller;
-    if (c == null || !c.value.isInitialized) return;
-    if (state == AppLifecycleState.inactive) {
+    if (state == AppLifecycleState.inactive || state == AppLifecycleState.paused) {
+      final c = _controller;
+      if (c == null) return;
       _controller = null;
+      _suspended = true;
       c.dispose();
-      setState(() {});
+      if (mounted) setState(() {});
     } else if (state == AppLifecycleState.resumed) {
-      _start();
+      WakelockPlus.enable();
+      if (_suspended && _cameras.isNotEmpty) {
+        _suspended = false;
+        _start();
+      }
     }
   }
 
   @override
   void dispose() {
     WidgetsBinding.instance.removeObserver(this);
+    WakelockPlus.disable();
     _controller?.dispose();
     super.dispose();
   }
@@ -228,7 +246,10 @@ class _LiveScanScreenState extends State<LiveScanScreen> with WidgetsBindingObse
                           },
                   ),
                   GestureDetector(
-                    onTap: () => setState(() => _paused = !_paused),
+                    onTap: () => setState(() {
+                      _paused = !_paused;
+                      _smoother.reset();
+                    }),
                     child: Container(
                       width: 74,
                       height: 74,

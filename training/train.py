@@ -24,6 +24,8 @@ def main():
     ap.add_argument("--name", default="ecosort", help="run name under runs/")
     ap.add_argument("--patience", type=int, default=25)
     ap.add_argument("--close-mosaic", type=int, default=10)
+    ap.add_argument("--lr0", type=float, default=0.01,
+                    help="initial learning rate (use ~0.002 when continuing from a trained model)")
     ap.add_argument("--hours", type=float, default=None,
                     help="time budget; overrides --epochs (useful on CI runners)")
     args = ap.parse_args()
@@ -49,6 +51,8 @@ def main():
         name=args.name,
         exist_ok=True,
         patience=args.patience,
+        lr0=args.lr0,
+        warmup_epochs=0.5 if args.lr0 < 0.01 else 3.0,
         **({"time": args.hours} if args.hours else {}),
         # Augmentations that matter for trash photos.
         hsv_h=0.015, hsv_s=0.6, hsv_v=0.4,

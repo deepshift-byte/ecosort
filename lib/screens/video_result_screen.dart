@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:wakelock_plus/wakelock_plus.dart';
 
 import '../models/scan_record.dart';
 import '../services/detector_service.dart';
@@ -28,12 +29,14 @@ class _VideoResultScreenState extends State<VideoResultScreen> {
   @override
   void initState() {
     super.initState();
+    WakelockPlus.enable(); // long analysis: don't let the screen lock
     _run();
   }
 
   @override
   void dispose() {
     _cancelled = true;
+    WakelockPlus.disable();
     super.dispose();
   }
 

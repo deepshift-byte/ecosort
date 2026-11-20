@@ -8,19 +8,24 @@ on:
   workflow_dispatch:
     inputs:
       hours:
-        description: "Training time budget (hours, max ~4.5)"
-        default: "4"
+        description: "Training time budget (hours, max ~5)"
+        default: "5"
+      continue_training:
+        description: "Start from the previous run's model instead of from scratch"
+        type: boolean
+        default: true
       per_class:
         description: "Open Images photos per category"
         default: "900"
 
 permissions:
   contents: write
+  actions: read  # download the previous run's model
 
 jobs:
   train:
     runs-on: ubuntu-latest
-    timeout-minutes: 350
+    timeout-minutes: 355
     env:
       KAGGLE_API_TOKEN: ${{ secrets.KAGGLE_API_TOKEN }}
     steps:
@@ -75,9 +80,32 @@ jobs:
               print(p, len(list((d / p / "images" / "train").iterdir())), "train images")
           PY
 
+      - name: Fetch previous model
+        if: inputs.continue_training
+        continue-on-error: true
+        working-directory: training
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          prev=$(gh run list --repo "$GITHUB_REPOSITORY" --workflow train-model.yml --status success \
+                   --limit 1 --json databaseId --jq '.[0].databaseId')
+          echo "previous successful run: $prev"
+          gh run download "$prev" --repo "$GITHUB_REPOSITORY" -n training-report -D prev
+          ls -la prev/weights/best.pt
+
       - name: Train
         working-directory: training
-        run: python -u train.py --model yolov8n.pt --data combined --name ecosort_v2 --imgsz 320 --batch 32 --device cpu --epochs 60 --hours ${{ inputs.hours }} --patience 8 --close-mosaic 3
+        run: |
+          if [ -f prev/weights/best.pt ]; then
+            echo "Continuing from the previous model"
+            model=prev/weights/best.pt; lr=0.002
+          else
+            echo "Starting from COCO-pretrained YOLOv8n"
+            model=yolov8n.pt; lr=0.01
+          fi
+          python -u train.py --model "$model" --lr0 $lr --data combined --name ecosort_v2 \
+            --imgsz 320 --batch 32 --device cpu --epochs 60 --hours ${{ inputs.hours }} \
+            --patience 8 --close-mosaic 1
 
       - name: Export to TensorFlow Lite
         working-directory: training
